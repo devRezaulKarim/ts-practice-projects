@@ -6,7 +6,7 @@ import { Button } from "../../ui/button";
 interface Todo {
   task: string;
   _id: number;
-  status: "pending" | "done";
+  status: "pending" | "completed";
 }
 
 interface TodoContainerProps {
@@ -81,7 +81,13 @@ const TodoContainer = ({
               i % 2 === 0
                 ? "bg-gray-200 hover:bg-gray-50"
                 : "bg-gray-100 hover:bg-gray-50"
-            } p-2 mt-[1px] flex items-center justify-between`}
+            } p-2 mt-[1px] flex items-center justify-between ${
+              todo.status === "completed"
+                ? i % 2 === 0
+                  ? "bg-green-200 hover:bg-green-50"
+                  : "bg-green-100 hover:bg-green-50"
+                : ""
+            }`}
           >
             {isUpdating && isUpdating._id === todo._id ? (
               <form
@@ -108,7 +114,7 @@ const TodoContainer = ({
               <>
                 <p
                   className={`${
-                    todo.status === "done" ? "line-through italic" : ""
+                    todo.status === "completed" ? "line-through italic" : ""
                   }`}
                 >
                   {todo.task}
@@ -118,7 +124,7 @@ const TodoContainer = ({
                     variant="ghost"
                     size="zero"
                     onClick={() => handleTaskDone(todo._id)}
-                    aria-label="Mark task as done"
+                    aria-label="Mark task as completed"
                   >
                     <CheckCheck
                       size={20}
@@ -126,18 +132,21 @@ const TodoContainer = ({
                       className="active:scale-75 duration-200"
                     />
                   </Button>
-                  <Button
-                    variant="ghost"
-                    size="zero"
-                    onClick={() => setIsUpdating(todo)}
-                    aria-label="Edit task"
-                  >
-                    <Pencil
-                      size={20}
-                      color="orange"
-                      className="active:scale-75 duration-200"
-                    />
-                  </Button>
+                  {todo.status !== "completed" && (
+                    <Button
+                      variant="ghost"
+                      size="zero"
+                      onClick={() => setIsUpdating(todo)}
+                      aria-label="Edit task"
+                    >
+                      <Pencil
+                        size={20}
+                        color="orange"
+                        className="active:scale-75 duration-200"
+                      />
+                    </Button>
+                  )}
+
                   <Button
                     variant="ghost"
                     size="zero"

@@ -1,6 +1,7 @@
 import { FormEvent, useState } from "react";
-import { Button } from "../../ui/button";
 import { AddTodoProps } from "@/types/Types";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 const AddTodo = ({ addTodo }: AddTodoProps) => {
   const [task, setTask] = useState<string>("");
@@ -17,9 +18,7 @@ const AddTodo = ({ addTodo }: AddTodoProps) => {
       onSubmit={handleSubmit}
       className="w-full xs:flex items-center gap-2 "
     >
-      <input
-        type="text"
-        className="text-lg px-2 py-1 border border-gray-500 outline-none rounded-md w-full"
+      <Input
         placeholder="Task"
         value={task}
         onChange={(e) => setTask(e.target.value)}

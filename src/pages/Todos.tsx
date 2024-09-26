@@ -48,14 +48,12 @@ const Todos = () => {
   };
 
   useEffect(() => {
-    if (selectedStatus === "all") {
-      setTodos(allTodos);
-    }
     if (selectedStatus === "pending") {
       setTodos(allTodos.filter((todo) => todo.status === "pending"));
-    }
-    if (selectedStatus === "completed") {
+    } else if (selectedStatus === "completed") {
       setTodos(allTodos.filter((todo) => todo.status === "completed"));
+    } else {
+      setTodos(allTodos);
     }
   }, [allTodos, selectedStatus]);
 

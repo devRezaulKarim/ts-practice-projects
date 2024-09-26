@@ -3,6 +3,7 @@ import { FormEvent, useRef, useState } from "react";
 import ConfirmationModal from "../../shared/ConfirmationModal";
 import { Button } from "../../ui/button";
 import { Todo, TodoContainerProps } from "@/types/Types";
+import { Input } from "@/components/ui/input";
 
 const TodoContainer = ({
   todos,
@@ -88,9 +89,7 @@ const TodoContainer = ({
                 }}
                 className="w-full flex items-center gap-2"
               >
-                <input
-                  type="text"
-                  className="text-lg px-2 py-1 border border-gray-500 outline-none rounded-md w-full"
+                <Input
                   placeholder="Task"
                   value={isUpdating.task}
                   onChange={(e) => handleTaskUpdate(e.target.value)}

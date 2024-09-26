@@ -1,10 +1,5 @@
-import { Dispatch, SetStateAction } from "react";
 import { Button } from "../ui/button";
-
-interface ConfirmationModalProps {
-  handleDelete: () => void;
-  setIsDeleting: Dispatch<SetStateAction<number | null>>;
-}
+import { ConfirmationModalProps } from "@/types/Types";
 
 const ConfirmationModal = ({
   handleDelete,

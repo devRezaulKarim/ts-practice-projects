@@ -4,12 +4,7 @@ import TodoContainer from "../components/custom-components/todo/TodoContainer";
 import AppTitle from "@/components/shared/AppTitle";
 import BackButton from "@/components/shared/BackButton";
 import Status from "@/components/custom-components/todo/Status";
-
-interface Todo {
-  task: string;
-  _id: number;
-  status: "pending" | "completed";
-}
+import { Todo } from "@/types/Types";
 
 const Todos = () => {
   const [allTodos, setAllTodos] = useState<Todo[]>([

@@ -1,9 +1,7 @@
 import { FormEvent, useState } from "react";
 import { Button } from "../../ui/button";
+import { AddTodoProps } from "@/types/Types";
 
-interface AddTodoProps {
-  addTodo: (todo: string) => void;
-}
 const AddTodo = ({ addTodo }: AddTodoProps) => {
   const [task, setTask] = useState<string>("");
 

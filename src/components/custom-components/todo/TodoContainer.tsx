@@ -1,21 +1,8 @@
 import { CheckCheck, GripVertical, Pencil, Trash } from "lucide-react";
-import { Dispatch, FormEvent, SetStateAction, useRef, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
 import ConfirmationModal from "../../shared/ConfirmationModal";
 import { Button } from "../../ui/button";
-
-interface Todo {
-  task: string;
-  _id: number;
-  status: "pending" | "completed";
-}
-
-interface TodoContainerProps {
-  todos: Todo[];
-  setTodos: Dispatch<SetStateAction<Todo[]>>;
-  handleTaskDone: (_id: number) => void;
-  handleUpdateTask: (task: Todo) => void;
-  handleDeleteTask: (_id: number) => void;
-}
+import { Todo, TodoContainerProps } from "@/types/Types";
 
 const TodoContainer = ({
   todos,

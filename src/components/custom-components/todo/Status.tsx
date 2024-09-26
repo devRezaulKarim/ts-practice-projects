@@ -1,12 +1,9 @@
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Dispatch, SetStateAction } from "react";
+import { StatusType, StatusProps } from "@/types/Types";
 
-const status: string[] = ["all", "pending", "completed"];
-interface StatusProps {
-  selectedStatus: string;
-  setSelectedStatus: Dispatch<SetStateAction<string>>;
-}
+const status: StatusType[] = ["all", "pending", "completed"];
+
 const Status = ({ selectedStatus, setSelectedStatus }: StatusProps) => {
   return (
     <div className="flex gap-4 pt-2">

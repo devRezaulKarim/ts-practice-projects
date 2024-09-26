@@ -1,6 +1,4 @@
-interface AppTitleProps {
-  title: string;
-}
+import { AppTitleProps } from "@/types/Types";
 
 const AppTitle = ({ title }: AppTitleProps) => {
   return (

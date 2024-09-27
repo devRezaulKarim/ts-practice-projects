@@ -1,5 +1,11 @@
 import { Dispatch, SetStateAction } from "react";
 
+export interface SmallFormProps {
+  dispatchSubmit: (value: string) => void;
+  placeholder: string;
+  buttonText: string;
+}
+
 export interface Todo {
   task: string;
   _id: number;

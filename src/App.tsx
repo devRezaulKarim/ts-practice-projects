@@ -10,7 +10,7 @@ function App() {
       {apps.map((App) => (
         <div
           key={App._id}
-          className="w-96 h-72 overflow-hidden relative border border-gray-700 rounded-lg"
+          className="w-96 h-60 overflow-hidden relative border border-gray-700 rounded-lg hover:scale-105 duration-200"
         >
           <App.app />
           <Link

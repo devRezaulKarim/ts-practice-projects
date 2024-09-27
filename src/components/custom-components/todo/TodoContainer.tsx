@@ -1,5 +1,5 @@
-import { CheckCheck, GripVertical, Pencil, Trash } from "lucide-react";
-import { FormEvent, useRef, useState } from "react";
+import { CheckCheck, GripVertical, Pencil, Save, Trash, X } from "lucide-react";
+import { FormEvent, MouseEvent, useRef, useState } from "react";
 import ConfirmationModal from "../../shared/ConfirmationModal";
 import { Button } from "../../ui/button";
 import { Todo, TodoContainerProps } from "@/types/Types";
@@ -13,6 +13,7 @@ const TodoContainer = ({
   handleDeleteTask,
 }: TodoContainerProps) => {
   const [isUpdating, setIsUpdating] = useState<Todo | null>(null);
+  const [error, setError] = useState<boolean>(false);
   const [isDraggable, setIsDraggable] = useState<boolean>(false);
   const [isDeleting, setIsDeleting] = useState<number | null>(null);
   const draggingItem = useRef<number | null>(null);
@@ -21,6 +22,18 @@ const TodoContainer = ({
   const handleTaskUpdate = (val: string) => {
     if (isUpdating) {
       setIsUpdating((prevTask) => ({ ...prevTask!, task: val }));
+    }
+  };
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (isUpdating) {
+      if (!isUpdating.task.trim()) {
+        setError(true);
+        return;
+      }
+      handleUpdateTask(isUpdating);
+      setIsUpdating(null);
     }
   };
 
@@ -80,21 +93,35 @@ const TodoContainer = ({
             {isUpdating && isUpdating._id === todo._id ? (
               <form
                 action=""
-                onSubmit={(e: FormEvent<HTMLFormElement>) => {
-                  e.preventDefault();
-                  if (isUpdating) {
-                    handleUpdateTask(isUpdating);
-                    setIsUpdating(null);
-                  }
-                }}
+                onSubmit={handleSubmit}
                 className="w-full flex items-center gap-2"
               >
                 <Input
+                  className={`${
+                    error ? "border-red-500 placeholder:text-red-500" : ""
+                  }`}
                   placeholder="Task"
                   value={isUpdating.task}
-                  onChange={(e) => handleTaskUpdate(e.target.value)}
+                  onChange={(e) => {
+                    setError(false);
+                    handleTaskUpdate(e.target.value);
+                  }}
                 />
-                <Button className="uppercase md:px-8">Save</Button>
+                <Button className="uppercase p-1 h-auto md:h-9 md:px-4 flex items-center gap-1">
+                  <Save size={16} />
+                  <span className="hidden md:block">Save</span>
+                </Button>
+                <Button
+                  onClick={(event: MouseEvent<HTMLButtonElement>) => {
+                    event.preventDefault();
+                    setIsUpdating(null);
+                  }}
+                  variant="destructive"
+                  className="uppercase p-1 h-auto md:h-9 md:px-4 flex items-center gap-1"
+                >
+                  <X size={18} />
+                  <span className="hidden md:block">Cancel</span>
+                </Button>
               </form>
             ) : (
               <>

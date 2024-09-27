@@ -6,9 +6,10 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { WeatherCardProps } from "@/types/Types";
+import { getCurrentTimeAndDate } from "@/utls/getCurrentTime";
 
 const WeatherCard = ({ weather }: WeatherCardProps) => {
-  console.log(weather.main);
+  console.log(weather);
   return (
     <Card className="mt-6 w-fit mx-auto">
       <CardHeader>
@@ -19,8 +20,12 @@ const WeatherCard = ({ weather }: WeatherCardProps) => {
               {`, ${weather?.sys?.country}`}
             </CardTitle>
             <CardDescription className="mt-1">
-              <span className="block">lon: {weather.coord.lon}</span>
-              <span className="block">lat: {weather.coord.lat}</span>
+              <span className="block">
+                C. Time: {getCurrentTimeAndDate(weather.timezone).time}
+              </span>
+              <span className="block">
+                Date: {getCurrentTimeAndDate(weather.timezone).date}
+              </span>
             </CardDescription>
           </div>
           <div className="">

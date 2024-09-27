@@ -1,7 +1,7 @@
-import Form from "@/components/custom-components/weather/Form";
 import WeatherCard from "@/components/custom-components/weather/WeatherCard";
 import AppTitle from "@/components/shared/AppTitle";
 import BackButton from "@/components/shared/BackButton";
+import SmallForm from "@/components/shared/SmallForm";
 import { Weather } from "@/types/Types";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
@@ -25,7 +25,7 @@ const WeatherApp = () => {
         setWeatherData(response);
         setError("");
       } else {
-        setError(response.message);
+        setError(`"${city}" ${response.message}`);
       }
     })();
   }, [city]);
@@ -38,13 +38,19 @@ const WeatherApp = () => {
     >
       <BackButton />
       <AppTitle title="Weather app" />
-      <Form searchCity={setCity} />
+      <SmallForm
+        buttonText="Search"
+        dispatchSubmit={setCity}
+        placeholder="City"
+      />
       {error && (
         <p className="first-letter:uppercase pt-1 text-red-500 font-semibold">
           {error}
         </p>
       )}
-      {weatherData && <WeatherCard weather={weatherData} />}
+      {weatherData && location.pathname.replace("/", "") && (
+        <WeatherCard weather={weatherData} />
+      )}
     </div>
   );
 };

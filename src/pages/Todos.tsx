@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import AddTodo from "../components/custom-components/todo/AddTodo";
 import TodoContainer from "../components/custom-components/todo/TodoContainer";
 import AppTitle from "@/components/shared/AppTitle";
 import BackButton from "@/components/shared/BackButton";
 import Status from "@/components/custom-components/todo/Status";
 import { Todo } from "@/types/Types";
 import { useLocation } from "react-router-dom";
+import SmallForm from "@/components/shared/SmallForm";
 
 const Todos = () => {
   const [allTodos, setAllTodos] = useState<Todo[]>([
@@ -67,12 +67,12 @@ const Todos = () => {
     >
       <BackButton />
       <AppTitle title="todo app" />
-      <AddTodo addTodo={addTodo} />
+      <SmallForm buttonText="add" dispatchSubmit={addTodo} placeholder="Task" />
       <Status
         selectedStatus={selectedStatus}
         setSelectedStatus={setSelectedStatus}
       />
-      {todos.length > 0 && (
+      {todos.length > 0 && location.pathname.replace("/", "") && (
         <TodoContainer
           todos={todos}
           setTodos={setTodos}

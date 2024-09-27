@@ -5,6 +5,7 @@ import AppTitle from "@/components/shared/AppTitle";
 import BackButton from "@/components/shared/BackButton";
 import Status from "@/components/custom-components/todo/Status";
 import { Todo } from "@/types/Types";
+import { useLocation } from "react-router-dom";
 
 const Todos = () => {
   const [allTodos, setAllTodos] = useState<Todo[]>([
@@ -16,6 +17,7 @@ const Todos = () => {
   ]);
   const [todos, setTodos] = useState<Todo[]>([]);
   const [selectedStatus, setSelectedStatus] = useState<string>("all");
+  const location = useLocation();
 
   const addTodo = (task: string) => {
     setAllTodos((pre) => [
@@ -58,7 +60,11 @@ const Todos = () => {
   }, [allTodos, selectedStatus]);
 
   return (
-    <div className="w-full max-w-[800px] mx-auto border border-gray-500 rounded-lg p-2 md:p-8 relative">
+    <div
+      className={`w-full max-w-[800px] mx-auto border-gray-500 rounded-lg p-2 md:p-8 relative ${
+        location.pathname.replace("/", "") ? "border" : ""
+      }`}
+    >
       <BackButton />
       <AppTitle title="todo app" />
       <AddTodo addTodo={addTodo} />

@@ -1,27 +1,14 @@
-import SearchedRecipeBar from "@/components/custom-components/recipe/SearchedRecipeBar";
+import Recipes from "@/components/custom-components/recipe/Recipes";
 import AppTitle from "@/components/shared/AppTitle";
 import BackButton from "@/components/shared/BackButton";
 import SmallForm from "@/components/shared/SmallForm";
 import { Button } from "@/components/ui/button";
-import { Recipe } from "@/types/Types";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useLocation } from "react-router-dom";
 
 const RecipeBook = () => {
   const [recipeFor, setRecipeFor] = useState<string>("");
-  const [recipes, setRecipes] = useState<Recipe[]>([]);
   const location = useLocation();
-
-  useEffect(() => {
-    console.log(recipes);
-  }, [recipes]);
-
-  useEffect(() => {
-    const url = `https://dummyjson.com/recipes/search?q=${recipeFor}&limit=50`;
-    fetch(url)
-      .then((res) => res.json())
-      .then((res) => setRecipes(res.recipes));
-  }, [recipeFor]);
 
   return (
     <div
@@ -48,11 +35,7 @@ const RecipeBook = () => {
           </Button>
         )}
       </div>
-      <>
-        {recipeFor && (
-          <SearchedRecipeBar quantity={recipes.length} recipeFor={recipeFor} />
-        )}
-      </>
+      {location.pathname.replace("/", "") && <Recipes recipeFor={recipeFor} />}
     </div>
   );
 };

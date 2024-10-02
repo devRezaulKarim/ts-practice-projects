@@ -1,4 +1,5 @@
 import App from "@/App";
+import RecipeDetails from "@/components/custom-components/recipe/RecipeDetails";
 import ExpenseTracker from "@/pages/ExpenseTracker";
 import MovieSearchApp from "@/pages/MovieSearchApp";
 import RecipeBook from "@/pages/RecipeBook";
@@ -30,5 +31,9 @@ export const routes = createBrowserRouter([
   {
     path: "/app/recipe-book",
     element: <RecipeBook />,
+  },
+  {
+    path: "/app/recipe-book/recipe-details/:id",
+    element: <RecipeDetails />,
   },
 ]);

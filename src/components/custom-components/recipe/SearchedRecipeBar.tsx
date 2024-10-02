@@ -10,7 +10,7 @@ const SearchedRecipeBar = ({ quantity, recipeFor }: SearchedRecipeBarProps) => {
     <div className="my-5">
       <h4 className="text-xl font-semibold">
         <span>{quantity}</span> <span>{singularPlural(quantity)}</span> found
-        for <span className="italic">"{recipeFor}"</span>
+        for <span className="italic capitalize">"{recipeFor}"</span>
       </h4>
     </div>
   );

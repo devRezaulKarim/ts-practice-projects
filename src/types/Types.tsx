@@ -115,3 +115,6 @@ export interface SearchedRecipeBarProps {
   quantity: number;
   recipeFor: string;
 }
+export interface RecipeCardProps {
+  recipe: Recipe;
+}

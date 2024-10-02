@@ -26,6 +26,7 @@ const SmallForm = ({
       className="w-full xs:flex items-center gap-2 "
     >
       <Input
+        id="inputField"
         className={`${error ? "border-red-500 placeholder:text-red-500" : ""}`}
         placeholder={placeholder}
         value={value}

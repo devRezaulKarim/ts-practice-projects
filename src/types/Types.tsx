@@ -110,3 +110,8 @@ export interface Recipe {
   reviewCount: number;
   mealType: string[];
 }
+
+export interface SearchedRecipeBarProps {
+  quantity: number;
+  recipeFor: string;
+}

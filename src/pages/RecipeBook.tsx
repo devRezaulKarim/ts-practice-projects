@@ -1,3 +1,4 @@
+import SearchedRecipeBar from "@/components/custom-components/recipe/SearchedRecipeBar";
 import AppTitle from "@/components/shared/AppTitle";
 import BackButton from "@/components/shared/BackButton";
 import SmallForm from "@/components/shared/SmallForm";
@@ -47,6 +48,11 @@ const RecipeBook = () => {
           </Button>
         )}
       </div>
+      <>
+        {recipeFor && (
+          <SearchedRecipeBar quantity={recipes.length} recipeFor={recipeFor} />
+        )}
+      </>
     </div>
   );
 };

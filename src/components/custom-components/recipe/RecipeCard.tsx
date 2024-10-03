@@ -21,7 +21,7 @@ const RecipeCard = ({ recipe }: RecipeCardProps) => {
         <div className="pt-2 flex divide-x-2 gap-1">
           <span>{recipe.cuisine}</span>
           <span className="flex divide-x-2 gap-1">
-            {recipe.mealType.map((type) => (
+            {recipe.mealType.map((type: string) => (
               <span key={type} className="pl-1">
                 {type}
               </span>

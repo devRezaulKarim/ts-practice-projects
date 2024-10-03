@@ -68,7 +68,7 @@ const Recipes = ({ recipeFor }: { recipeFor: string }) => {
               <RecipeCard key={recipe.id} recipe={recipe} />
             ))}
           </div>
-          {recipes.length / 10 > 1 && (
+          {Math.ceil(recipes.length / 10) > 1 && (
             <Pagination className="mt-4">
               <PaginationContent>
                 <PaginationItem>
@@ -78,19 +78,23 @@ const Recipes = ({ recipeFor }: { recipeFor: string }) => {
                   />
                 </PaginationItem>
                 <PaginationItem>
-                  {Array.from({ length: recipes.length / 10 }).map((_, i) => {
-                    return (
-                      <PaginationLink
-                        key={i}
-                        onClick={handlePageClick}
-                        className={`cursor-pointer ml-2 ${
-                          currentPage === i + 1 ? " border border-gray-200" : ""
-                        }`}
-                      >
-                        {i + 1}
-                      </PaginationLink>
-                    );
-                  })}
+                  {Array.from({ length: Math.ceil(recipes.length / 10) }).map(
+                    (_, i) => {
+                      return (
+                        <PaginationLink
+                          key={i}
+                          onClick={handlePageClick}
+                          className={`cursor-pointer ml-2 ${
+                            currentPage === i + 1
+                              ? " border border-gray-200"
+                              : ""
+                          }`}
+                        >
+                          {i + 1}
+                        </PaginationLink>
+                      );
+                    }
+                  )}
                 </PaginationItem>
                 <PaginationItem>
                   <PaginationNext

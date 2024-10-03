@@ -19,7 +19,7 @@ const RecipeDetails = () => {
     if (params.id) {
       getSingleRecipe(params.id);
     }
-  }, [params]);
+  }, [params.id]);
 
   if (isLoading || !recipe) {
     return <RecipeDetailsSkeleton />;
@@ -82,28 +82,32 @@ const RecipeDetails = () => {
   </div> */}
 
         {/* Ingredients  */}
-        <div className="mb-6">
-          <h2 className="text-2xl font-semibold mb-4">Ingredients</h2>
-          <ul className="list-disc list-inside">
-            {recipe.ingredients.map((ingredient, index) => (
-              <li key={index} className="text-gray-700">
-                {ingredient}
-              </li>
-            ))}
-          </ul>
-        </div>
+        {recipe.ingredients && recipe.ingredients.length > 0 && (
+          <div className="mb-6">
+            <h2 className="text-2xl font-semibold mb-4">Ingredients</h2>
+            <ul className="list-disc list-inside">
+              {recipe.ingredients.map((ingredient, index) => (
+                <li key={index} className="text-gray-700">
+                  {ingredient}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
 
         {/*  Instructions  */}
-        <div className="mb-6">
-          <h2 className="text-2xl font-semibold mb-4">Instructions</h2>
-          <ol className="list-decimal list-inside space-y-2">
-            {recipe.instructions.map((instruction, index) => (
-              <li key={index} className="text-gray-700">
-                {instruction}
-              </li>
-            ))}
-          </ol>
-        </div>
+        {recipe.instructions && recipe.instructions.length > 0 && (
+          <div className="mb-6">
+            <h2 className="text-2xl font-semibold mb-4">Instructions</h2>
+            <ol className="list-decimal list-inside space-y-2">
+              {recipe.instructions.map((instruction, index) => (
+                <li key={index} className="text-gray-700">
+                  {instruction}
+                </li>
+              ))}
+            </ol>
+          </div>
+        )}
 
         {/*  Additional Info  */}
         <div className="mb-6">

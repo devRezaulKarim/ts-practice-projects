@@ -13,6 +13,13 @@ import {
 } from "@/components/ui/pagination";
 import RecipeCardSkeleton from "./RecipeCardSkeleton";
 
+const scrollToTop = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+};
+
 const Recipes = ({ recipeFor }: { recipeFor: string }) => {
   const { recipes, isLoading, fetchRecipe } = useRecipes();
   const [recipeOnUi, setRecipeOnUi] = useState<Recipe[]>(recipes);
@@ -34,16 +41,19 @@ const Recipes = ({ recipeFor }: { recipeFor: string }) => {
   const handlePageClick = (e: MouseEvent<HTMLAnchorElement>) => {
     const target = e.target as HTMLAnchorElement;
     setCurrentPage(Number(target.innerText));
+    scrollToTop();
   };
 
   const handlePreviousClick = () => {
     if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
+      scrollToTop();
     }
   };
   const handleNextClick = () => {
     if (currentPage < recipes.length / 10) {
       setCurrentPage(currentPage + 1);
+      scrollToTop();
     }
   };
 
@@ -68,7 +78,7 @@ const Recipes = ({ recipeFor }: { recipeFor: string }) => {
               <RecipeCard key={recipe.id} recipe={recipe} />
             ))}
           </div>
-          {recipes.length / 10 > 1 && (
+          {Math.ceil(recipes.length / 10) > 1 && (
             <Pagination className="mt-4">
               <PaginationContent>
                 <PaginationItem>
@@ -78,19 +88,23 @@ const Recipes = ({ recipeFor }: { recipeFor: string }) => {
                   />
                 </PaginationItem>
                 <PaginationItem>
-                  {Array.from({ length: recipes.length / 10 }).map((_, i) => {
-                    return (
-                      <PaginationLink
-                        key={i}
-                        onClick={handlePageClick}
-                        className={`cursor-pointer ml-2 ${
-                          currentPage === i + 1 ? " border border-gray-200" : ""
-                        }`}
-                      >
-                        {i + 1}
-                      </PaginationLink>
-                    );
-                  })}
+                  {Array.from({ length: Math.ceil(recipes.length / 10) }).map(
+                    (_, i) => {
+                      return (
+                        <PaginationLink
+                          key={i}
+                          onClick={handlePageClick}
+                          className={`cursor-pointer ml-2 ${
+                            currentPage === i + 1
+                              ? " border border-gray-200"
+                              : ""
+                          }`}
+                        >
+                          {i + 1}
+                        </PaginationLink>
+                      );
+                    }
+                  )}
                 </PaginationItem>
                 <PaginationItem>
                   <PaginationNext

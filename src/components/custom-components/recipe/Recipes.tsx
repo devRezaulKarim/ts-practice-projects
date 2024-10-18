@@ -13,6 +13,13 @@ import {
 } from "@/components/ui/pagination";
 import RecipeCardSkeleton from "./RecipeCardSkeleton";
 
+const scrollToTop = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+};
+
 const Recipes = ({ recipeFor }: { recipeFor: string }) => {
   const { recipes, isLoading, fetchRecipe } = useRecipes();
   const [recipeOnUi, setRecipeOnUi] = useState<Recipe[]>(recipes);
@@ -34,16 +41,19 @@ const Recipes = ({ recipeFor }: { recipeFor: string }) => {
   const handlePageClick = (e: MouseEvent<HTMLAnchorElement>) => {
     const target = e.target as HTMLAnchorElement;
     setCurrentPage(Number(target.innerText));
+    scrollToTop();
   };
 
   const handlePreviousClick = () => {
     if (currentPage > 1) {
       setCurrentPage(currentPage - 1);
+      scrollToTop();
     }
   };
   const handleNextClick = () => {
     if (currentPage < recipes.length / 10) {
       setCurrentPage(currentPage + 1);
+      scrollToTop();
     }
   };
 

@@ -1,17 +1,26 @@
 import { RecipeCardProps } from "@/types/Types";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
 const RecipeCard = ({ recipe }: RecipeCardProps) => {
+  const [isImgLoading, setIsImgLoading] = useState(true);
   return (
     <Link
       to={`/app/recipe-book/recipe-details/${recipe.id}`}
       className="max-w-80 border-2 rounded-lg block"
     >
       <div className="w-full min-w-60 aspect-square rounded-t-md overflow-hidden">
+        {isImgLoading && (
+          <div className="w-full h-full grid place-items-center">
+            <div className="imgLoader"></div>
+          </div>
+        )}
         <img
+          loading="lazy"
           className="w-full h-full object-cover"
           src={recipe.image}
           alt="Recipe Image"
+          onLoad={() => setIsImgLoading(false)}
         />
       </div>
       <div className="p-2">
